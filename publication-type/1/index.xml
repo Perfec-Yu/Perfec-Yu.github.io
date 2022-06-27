@@ -2,77 +2,77 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>1 | 于</title>
-    <link>https://example.com/publication-type/1/</link>
-      <atom:link href="https://example.com/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://perfec-yu.github.io/publication-type/1/</link>
+      <atom:link href="https://perfec-yu.github.io/publication-type/1/index.xml" rel="self" type="application/rss+xml" />
     <description>1</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 01 Jul 2022 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://example.com/media/icon_hu70abeb15d803708cc6c51bdc94153538_368998_512x512_fill_lanczos_center_3.png</url>
+      <url>https://perfec-yu.github.io/media/icon_hu70abeb15d803708cc6c51bdc94153538_368998_512x512_fill_lanczos_center_3.png</url>
       <title>1</title>
-      <link>https://example.com/publication-type/1/</link>
+      <link>https://perfec-yu.github.io/publication-type/1/</link>
     </image>
     
     <item>
       <title>Event Extractor with Only a Few Examples</title>
-      <link>https://example.com/publication/yu-etal-2022-event/</link>
+      <link>https://perfec-yu.github.io/publication/yu-etal-2022-event/</link>
       <pubDate>Fri, 01 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/yu-etal-2022-event/</guid>
+      <guid>https://perfec-yu.github.io/publication/yu-etal-2022-event/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RESIN-11: Schema-guided Event Prediction for 11 Newsworthy Scenarios</title>
-      <link>https://example.com/publication/du-etal-2022-resin/</link>
+      <link>https://perfec-yu.github.io/publication/du-etal-2022-resin/</link>
       <pubDate>Fri, 01 Jul 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/du-etal-2022-resin/</guid>
+      <guid>https://perfec-yu.github.io/publication/du-etal-2022-resin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>COVID-19 Claim Radar: A Structured Claim Extraction and Tracking System</title>
-      <link>https://example.com/publication/li-etal-2022-covid/</link>
+      <link>https://perfec-yu.github.io/publication/li-etal-2022-covid/</link>
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/li-etal-2022-covid/</guid>
+      <guid>https://perfec-yu.github.io/publication/li-etal-2022-covid/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lifelong Event Detection with Knowledge Transfer</title>
-      <link>https://example.com/publication/yu-etal-2021-lifelong/</link>
+      <link>https://perfec-yu.github.io/publication/yu-etal-2021-lifelong/</link>
       <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/yu-etal-2021-lifelong/</guid>
+      <guid>https://perfec-yu.github.io/publication/yu-etal-2021-lifelong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MUSE: Textual Attributes Guided Portrait Painting Generation</title>
-      <link>https://example.com/publication/xiaodan-2021-muse/</link>
+      <link>https://perfec-yu.github.io/publication/xiaodan-2021-muse/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/xiaodan-2021-muse/</guid>
+      <guid>https://perfec-yu.github.io/publication/xiaodan-2021-muse/</guid>
       <description></description>
     </item>
     
     <item>
       <title>FewRel: A Large-Scale Supervised Few-Shot Relation Classification Dataset with State-of-the-Art Evaluation</title>
-      <link>https://example.com/publication/han-etal-2018-fewrel/</link>
+      <link>https://perfec-yu.github.io/publication/han-etal-2018-fewrel/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/han-etal-2018-fewrel/</guid>
+      <guid>https://perfec-yu.github.io/publication/han-etal-2018-fewrel/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hierarchical Relation Extraction with Coarse-to-Fine Grained Attention</title>
-      <link>https://example.com/publication/han-etal-2018-hierarchical/</link>
+      <link>https://perfec-yu.github.io/publication/han-etal-2018-hierarchical/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/han-etal-2018-hierarchical/</guid>
+      <guid>https://perfec-yu.github.io/publication/han-etal-2018-hierarchical/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tracking of Enriched Dialog States for Flexible Conversational Information Access</title>
-      <link>https://example.com/publication/dai-2018-tracking/</link>
+      <link>https://perfec-yu.github.io/publication/dai-2018-tracking/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      <guid>https://example.com/publication/dai-2018-tracking/</guid>
+      <guid>https://perfec-yu.github.io/publication/dai-2018-tracking/</guid>
       <description></description>
     </item>
     
