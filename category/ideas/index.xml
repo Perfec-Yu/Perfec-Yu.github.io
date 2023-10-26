@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ideas | 于</title>
+    <link>https://perfec-yu.github.io/category/ideas/</link>
+      <atom:link href="https://perfec-yu.github.io/category/ideas/index.xml" rel="self" type="application/rss+xml" />
+    <description>Ideas</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language>
+    <image>
+      <url>https://perfec-yu.github.io/media/icon_hu70abeb15d803708cc6c51bdc94153538_368998_512x512_fill_lanczos_center_3.png</url>
+      <title>Ideas</title>
+      <link>https://perfec-yu.github.io/category/ideas/</link>
+    </image>
+    
+    <item>
+      <title>Thoughts on Randomizing Lanugage Modeling for Better Language Learning</title>
+      <link>https://perfec-yu.github.io/post/splm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://perfec-yu.github.io/post/splm/</guid>
+      <description>&lt;h2 id=&#34;why-writing-this-and-what-this-is-about&#34;&gt;Why Writing This and What This Is About&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;TLDR&lt;/em&gt;&lt;/strong&gt;: Why? Call for broader discussion and potential collaboration to improve and implement this idea. What? About building a new framework that is not based on a constant language model, but a stochastic language model. This new framework explains a lot challenges and recent work on LLMs and provides insights on improving langauge learning. &lt;a href=&#34;#overview&#34;&gt;Then click there to the main content&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I recently came up with notion of modeling language not as a constant language model, but a random variable or a stoachastic language model. This idea originates from many things I have worked on, am working on and have read about. Also, it is not a completely new idea, instead it is related, similar to, and combines several established methods and mathematical models, though with minor differences to each of them. In fact I wouldn&amp;rsquo;t even expect any framework that completely negates everything intelligent researchers have built for AI and machine learning. Anyway, I have been trying to formulate this stochastic language model and see what kind of insights we can get from this perspective. Interestingly, as I am developing this framework, I notice this is closely related a lot challenges or methodlogies in current LLM research, including but not limited to hallucination, biases, continual fine-tuning/knowledge editing/instruction fine-tuning/RLHF, tool learning, role playing, retrieval augmentation, mixture-of-experts and multimodality (the connection between randomizing a language model and multimodality sounds a little weird, but I will explain later).&lt;/p&gt;
+&lt;p&gt;Currently, I have sort out the most basic concepts of what it means to randomize a language model, what are its implications&amp;amp;benefits and roughly how we should build this model or improve existing LLMs by approximating this model. However, I found that it is not trivial to explain this idea to others in a short, e.g., 30min to 1h, period of time and using more brief media of communications such as slides. I was only able to convey and improve most of my thoughts through multiple conversations and active discussions with some of my collegue PhD students. However, due to the level of generality as it seems to me for now, I think this notion of stochastic language modeling is kind of useful for reaserch in LLMs. Moreover, limited by my personal mathematical capability and available computational and data resources, it seems very challenging to fully implement everything I am thinking of under this framework. Moreover, I think many on-going research in the community could be closely related to this framework. So I think maybe it is simply better to write about this idea for broader discussions, suggestions and potential collaboration to further improve this idea and bring this idea to reality. Another good thing about a post is that it doesn&amp;rsquo;t have to like research papers or a set of slides that need to follow certain structures. I feel more comfortable talking about my thoughts in this style.&lt;/p&gt;
+&lt;p&gt;In this post, I will try my best, although it might be kind of hard, to present this idea in an organized way. It might happen that you get a little bit lost at the start, but if you keep reading, it is very possible at some point that at some point you realize &amp;ldquo;oh this is related to/ kind of explains what I am working on / have worked on&amp;rdquo;. I would be very happy if these kind of situations happen and if you are interested in further discussion on this idea, please reach out at pengfei4 at illinois dot edu.&lt;/p&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I will try to explain this idea in the following aspects.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Basic mathematical definition of the stochastic language modeling. I shall use the name &lt;strong&gt;Stochastic Procedural Language Modeling&lt;/strong&gt; or SPLM since it is better to explain as a stochastic process rather than a single random variable. I know it could be elusive and boring to start with math rather than vivid examples, but I found that even a basic notion of what we are aiming for will benefit the understanding the &amp;ldquo;vivid examples&amp;rdquo;. The math part will not go beyond undergraduate-level probability theory, since I will not go into deeper analysis of the stochastic process. The purpose is just to leave a basic impression of the objective.&lt;/li&gt;
+&lt;li&gt;How this framework gives better explaination of various challenges mentioned above in LLMs, and how it is potentially easier to solve such challenges under this framework.&lt;/li&gt;
+&lt;li&gt;Explaning that a series of augmentation methods proposed for LLM are trying to approximate this framework. Moreover, how this framework explains an incomplete collection recent work.&lt;/li&gt;
+&lt;li&gt;Some initial thoughts on how to implement this idea, and how flexible this implemented framework will be in representing not only language but many intelligent behaviors. (to-be finished)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;definition-of-stochstic-procedural-language-model&#34;&gt;Definition of Stochstic Procedural Language Model&lt;/h2&gt;
+&lt;h3 id=&#34;conventions-for-notations&#34;&gt;Conventions for Notations&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Lower case letters for variables&lt;/li&gt;
+&lt;li&gt;Upper letters for mappings (functions, distributions, etc.)&lt;/li&gt;
+&lt;li&gt;Caligraphic letters for sets or spaces, except for conventional notations such as $\mathbb{R}$ or $[0,1]$.&lt;/li&gt;
+&lt;li&gt;Greak letters for random variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;list-of-notations&#34;&gt;List of Notations&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;$\mathcal{V}$: vocabulary, or set of tokens&lt;/li&gt;
+&lt;li&gt;$\mathcal{S}=\bigcup_{n=1}^{\infty} \mathcal{V}^n$: set of textual sequences&lt;/li&gt;
+&lt;li&gt;$\mathcal{P}_\mathcal{S}$: the space of all probability distributions on $\mathcal{S}$ (language models)&lt;/li&gt;
+&lt;li&gt;$\Pi_\mathcal{S}=\mathcal{P}\circ\mathcal{P}_\mathcal{S}$: the space of distributions over language models (stochastic language models)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you just want the conclusion or you get lost while reading, go to &lt;a href=&#34;#summary-of-mathematics&#34;&gt;conclusion&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;stochstic-procedural-language-model&#34;&gt;Stochstic Procedural Language Model&lt;/h3&gt;
+&lt;p&gt;A stochastic language model, is simply a random variable $\mu\in\Pi_\mathcal{S}$. A stochastic process is used to model the process of generating a textual sequence under a stochastic language model. This is the reason why I think for language modeling, Stochstic Procedural Language Modeling is a better name. Before I illustrate the process, I would like to share some very simple intuitions and thoughts on adding the randomness.&lt;/p&gt;
+&lt;p&gt;For a language model $M\in\mathcal{P}_\mathcal{S}$, it gives a probability $P(s|M)$ for any textual sequence $s\in\mathcal{S}$. However, such a constant language model to me is like a &amp;ldquo;dead&amp;rdquo; model that doesn&amp;rsquo;t accept any more changes. BTW, from my understanding, this is also the reason why it is hard to even formulate an objective for continual fine-tuning/knowledge editing/instruction fine-tuning/RLHF. The cross-entropy loss is not the real objective, since convergence to this loss on the fine-tuning data would result in catastrophic forgetting. In most cases we can just define some heuristic criteria to stop the fine-tuning. Adding additional regularization terms such as $\lambda ||\theta-\theta_0||_2^2$ to the cross entropy might serve as a valid objective, while acute readers might already see this is close to considering language model as a &amp;ldquo;Gaussian language model&amp;rdquo; centered at the pretrained state.&lt;/p&gt;
+&lt;p&gt;Another two similar things that one might think of are mixture of experts or VAE. Firstly for mixture of experts which typically works on finite components, the space of language models might not only be too large, but also uncountable (meaning it cannot be indexed by natural numbers in case someone may be unfamiliar with this concept. Set of even numbers is countable but set of real numbers is not.). VAE is indeed more related. In fact I think adpating the ELBO from VAE is one possible way of learning such a model. And apart from the apparently much larger latent space than VAEs we used to see in practice, there is something else fundamentally different as I will show after explaining the stochastic process of generation.&lt;/p&gt;
+&lt;p&gt;For stochastic process of generation, it can simply be understood as a sequence $(\xi_i,\mu_i), i\in[1,n]$.  Here each $\xi_i$ corresponds to the random variable of a generated token, and $\mu_i$ is the i-th step language model. In this process, a stochastic language model $\mu$ essentially serve as some sort of prior. From the theory of VAE $\mu_i$ can be encoded using the entire sequence for learning. But for now we can simply ignore everything about learning and simply formulate the generation process as
+$$
+P(\xi_{1:n}) = P(\xi_1|\mu_1)P(\mu_1|\mu) \prod_{i=2}^{n} P(\xi_i|\xi_{1:i=1}, \mu_i)\hat{P}(\mu_i|\xi_{1:i-1}, \mu).
+$$
+There are actually a few alternative ways of decomposing this probabilities and this is just one of them. I choose this one because it aligns best with my understanding of how human compose sentences. I would like to add a few notes here before proceeding.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I added a hat in $\hat{P}(\mu_i|\xi_{1:i-1}, \mu)$. Mathematically, $P(\mu_i|\xi_{1:i-1}, \mu)$ can be computed as a posterior once the prior $\mu$ is learned. However, I think this posterior is only a model for the observed language, not for the generation that serves certain purpose or fulfills certain tasks. This is also the key difference between this process and VAE. Human are not parrots that replicates the distribution it oberserves, but rather produce contents consistent with themselves&amp;rsquo; values, beliefs, habits, knowledge and personalities etc. I will discuss how to get $\hat{P}$ later.&lt;/li&gt;
+&lt;li&gt;$P(\xi_i|\xi_{1:i=1}, \mu_i)$ discards the beautiful markov property and requires to re-compute everything when switching to a new language model. This might looks redundant at first glance but it will be explained.&lt;/li&gt;
+&lt;li&gt;For learning, we already see that $\mu$, the prior, needs also be learned rather than taking standard Gaussian as the original VAE. For example, we can take $\mu$ as a mixture of Gaussian and use a two-level EM (outer level for MoG and inner level for VAE).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Since now $\hat{P}(\mu_i|\xi_{1:i-1}, \mu)$ is not the probability of $P(\mu_i|\xi_{1:i-1}, \mu)$, we shall consider it to be generated by another model (encoder in VAE) and rewrite $P(\mu_i|\xi_{1:i-1}, \mu, G)$ where $G$ is the new model. Now, a SPLM is simply defined as a pair of $(\mu, G)$, If we look closer at what $G$ is doing, it associates some text $\xi_{1:i-1}$ with a stochastic language model. From the derivation of VAE (or EM, KMeans or just intuition, whichever is best for you), $G$ is, very probably, grouping a set of text $\mathcal{T}$ together into a conditional stochastic language model $\mu_\mathcal{T}$. One possible interpretation of $\mu_\mathcal{T}$ would be &lt;strong&gt;&lt;em&gt;a stochastic language model that is aware of the knowledge contained in $\mathcal{T}$&lt;/em&gt;&lt;/strong&gt;. This is already one desired property that is not so clear in LLMs: we can &lt;strong&gt;&lt;em&gt;pinpoint knowledge&lt;/em&gt;&lt;/strong&gt; of a model into a latent stochastic LM, and moreover, the knowledge we are using at each step during generation can be interpreted.&lt;/p&gt;
+&lt;p&gt;Now, I will simply incorporte the constant language model into this framework as the last step of this section. Let $M=\mathbb{E}\mu$ (treat $\mu$ as an infinite-dimensional random vector and expectation is taken element-wise), and $G$ is a function that always produces a delta-distribution (one-hot) at $M$. In other words, $M$ is simply the expectation of the stochastic language model. What is bad about expectation? The most straightforward outcome is &lt;strong&gt;&lt;em&gt;hallucination&lt;/em&gt;&lt;/strong&gt;. It can be better illustrated with a non-linguistic example. Consider a ball falls uniformly on $x=-1$ or $x=1$, the expected position would be $x=0$ where the ball will never falls on. Similarly, a SPLM might pick either $\phi$ or $\psi$ for the next generation, but never an average of them. One last comment I would like to leave is that, since we observe that LM is just a first-order approximation of the SPLM, adding any higher-order momentums or information about their joint distributions would help. If you simply expand the higher-order moments with infinite-dimensional random vector view of the distributions, higher-order momentums can been seen as modeling some multi-concept relations or multiary logical rules. We can do further analysis on this process or add additional assumptions but I think it is good enough to stop here and show some concrete examples. But before that, I will summarize the math content in case you lost somewhere in the middle.&lt;/p&gt;
+&lt;h3 id=&#34;summary-of-mathematics&#34;&gt;Summary of Mathematics&lt;/h3&gt;
+&lt;p&gt;A SPLM is a pair of $(\mu, G)$. $\mu$ is some prior distribution of stochastic language models. Intuitively, it can contain several clusters. $G$ is a function that associates a group of text with another cluster of language models that are aware of the knowledge contained in the group of text, while this association can depend on some values or preferences we set to the model. For language modeling (evaluation of probabilities),
+$$
+P(\xi_{1:n}) = P(\xi_1|\mu_1)P(\mu_1|\mu) \prod_{i=2}^{n} P(\xi_i|\xi_{1:i=1}, \mu_i)P(\mu_i|\xi_{1:i-1}, \mu),
+$$
+$G$ is ignored since the values we set doesn&amp;rsquo;t reflect the natural language distribution. $P(\mu_i|\xi_{1:i-1}, \mu)$ can be estimated through Bayesian inference. For generation,
+$$
+P(\xi_{1:n}) = P(\xi_1|\mu_1)P(\mu_1|\mu) \prod_{i=2}^{n} P(\xi_i|\xi_{1:i=1}, \mu_i)P(\mu_i|\xi_{1:i-1}, G, \mu).
+$$&lt;/p&gt;
+&lt;h2 id=&#34;splm-and-challenges-of-llms&#34;&gt;SPLM and Challenges of LLMs&lt;/h2&gt;
+&lt;p&gt;We already see how SPLM supports better knowledge localization and reduced hallucination from the math part. I will list some other topics that people around or me are working on. Everyone is welcome to contribute to this list. For the following sections, I will explain more on some topics I am more familiar with and less on those I only have basic knowledge or are overly simple.&lt;/p&gt;
+&lt;h3 id=&#34;modeling-deterministic-rulesbias&#34;&gt;Modeling Deterministic Rules/Bias&lt;/h3&gt;
+&lt;p&gt;From my perspective, the cause of failure in LLMs in these two topics are essentially the same as hallucination: the averaging effect of taking expectation. In SPLM, deterministic rules might be modeled into a separate language model where there are a lot of $P(x|y)=1$ and it is simply a latent component of $\mu$. The function $G$ will call this component when we need to do deterministic reasoning. Similarly, we can set preferences in $G$ between the biased and unbiased components for debiasing. One might think that, since we want an unbiased model, isn&amp;rsquo;t it equivalent to directly learn the induced LM from a $G,\mu$ when $G$ is set with the desired preference? There are several considerations here. Firstly, LLMs doesn&amp;rsquo;t explicitly model the latent components, so training the LLM to imitate an unbiased distribution may destruct other knowledge or the logical consistency of the LLM. To be more straightforward consider $A$ is a biased opinion and $B$ refers to biased people. $P(A)=P(A|B)P(B)+P(A|\neg B)P(\neg B)$. If we simply train the model to have $P(A)=0$, the LLM could, unrigorsly speaking,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;forms the belief that biased people are no longer biased $P(A|B)=0$;&lt;/li&gt;
+&lt;li&gt;forms the belief that is logically inconsistent (breaking the above equality): even though there is biased speech from biased people, there is no biased speech.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I personally believe the second cases should happen more frequently. In fact this is somewhat validated by the observed ripple effect in the next part for knowledge editing.&lt;/p&gt;
+&lt;h3 id=&#34;ripple-effect-in-knowledge-editing-and-fine-tuning&#34;&gt;Ripple Effect in Knowledge Editing and Fine-tuning&lt;/h3&gt;
+&lt;p&gt;Ripple effect refers to the effect of editing one fact might affect other facts or create new facts. For example,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fact: Messi has won a total of 7 Ballon d’Or b by 2022.&lt;/li&gt;
+&lt;li&gt;Knowledge Edit: Messi won Ballon d&amp;rsquo;Or for 2023&lt;/li&gt;
+&lt;li&gt;New Fact: Messi has won a total of 8 Ballon d&amp;rsquo;Or by 2023.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I personally think this is not only a problem for editing or fine-tuning, but for training (including pre-training) as a whole. Language models, even GPT-4, display weak ripple effect throughout the learning process. I speculate this to originates from the failure of modeling higher-order features of language models being a first order approximation of stochastic language models, which is related to the joint distribution of $P(P(x|\mu), P(y|\mu))$ for related (or even unrelated) facts $x,y$. Note that since $\mu$ is a random variable, $P(x|\mu)$ is also a random variable. So the above distribution is also a &amp;ldquo;distribution of distribution&amp;rdquo;. Further analysis would require more math so I will just stop here for now. From an intuitive perspective, training SPLM for new knowledge involves encoding new knowledge to corresponding clusters that represent a group of text. So the effect naturally propagates to relevant facts. Below are two more complex examples of ripple effect in GPT-4. The left column show some knowledge it knows and right column shows that it cannot use the knowledge for other tasks.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-ripple-effect-example-of-gpt4-1&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Ripple Effect Example of GPT4 (1)&#34; srcset=&#34;
+               /post/splm/ripple_1_hub4abfb4e90ee4a162fc9036c24ba2b14_350485_484d8320a907c6c3b0259955de46525f.webp 400w,
+               /post/splm/ripple_1_hub4abfb4e90ee4a162fc9036c24ba2b14_350485_9be75e54b576e1f9f3a6887e64b65b52.webp 760w,
+               /post/splm/ripple_1_hub4abfb4e90ee4a162fc9036c24ba2b14_350485_1200x1200_fit_q75_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://perfec-yu.github.io/post/splm/ripple_1_hub4abfb4e90ee4a162fc9036c24ba2b14_350485_484d8320a907c6c3b0259955de46525f.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;285&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Ripple Effect Example of GPT4 (1)
+    &lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  id=&#34;figure-ripple-effect-example-of-gpt4-2&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img alt=&#34;Ripple Effect Example of GPT4 (2)&#34; srcset=&#34;
+               /post/splm/ripple_2_hu05783c26468b1f1bcb437b0b368bd3c3_177036_3e0d7690c920d09dd7d06b9f44a363b0.webp 400w,
+               /post/splm/ripple_2_hu05783c26468b1f1bcb437b0b368bd3c3_177036_b411ef1a76eae7a325c2a3f6f19a7250.webp 760w,
+               /post/splm/ripple_2_hu05783c26468b1f1bcb437b0b368bd3c3_177036_1200x1200_fit_q75_h2_lanczos_3.webp 1200w&#34;
+               src=&#34;https://perfec-yu.github.io/post/splm/ripple_2_hu05783c26468b1f1bcb437b0b368bd3c3_177036_3e0d7690c920d09dd7d06b9f44a363b0.webp&#34;
+               width=&#34;760&#34;
+               height=&#34;204&#34;
+               loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Ripple Effect Example of GPT4 (2)
+    &lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;formulating-continual-fine-tuning&#34;&gt;Formulating Continual Fine-tuning&lt;/h3&gt;
+&lt;p&gt;Actually I am not knowledgeable enough about the continual fine-tuning of EM algorithms, such as whether it can also be formulated as the converging point under certain algorithms. But at least, I think new examples can first be encoded into the space of stochastic language models, and if they appears to be a new cluster that is far away from existing clusters, we need to assign a new component for them.&lt;/p&gt;
+&lt;h3 id=&#34;multimodality&#34;&gt;Multimodality&lt;/h3&gt;
+&lt;p&gt;Note that the encoding of a sample refers to mapping a sample into a latent cluster of stochastic language models. For a multimodal model, this provides a more direct way of examining related concepts in various modalities (mapping to the same cluster).&lt;/p&gt;
+&lt;h3 id=&#34;mappings-among-models&#34;&gt;Mappings Among Models&lt;/h3&gt;
+&lt;p&gt;In SPLMs, we only need to map latent clusters to align two different models. Such alignment can be achived by using a set of sentences as test bed to see the probabilities of corresponding clusters on two models given each context.&lt;/p&gt;
+&lt;h2 id=&#34;augmentation-methods-and-recent-work-that-can-be-explained-with-splm&#34;&gt;Augmentation Methods and Recent Work that Can be Explained with SPLM&lt;/h2&gt;
+&lt;h3 id=&#34;tool-learning-and-retrieval-augmentation&#34;&gt;Tool learning and Retrieval Augmentation&lt;/h3&gt;
+&lt;p&gt;Both of these two popular methods have the following format: for a sequence splitted into two parts, $x_{1:m};x_{m+1:n}$, a function produces some additional information from $F(z|x_{1:m})$, and the model generates the rest part with $P(x_{m+1:n}|x_{1:m},z)$. There are two ways of understanding this framework.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$G=F$ and $P(|z)$ is a sampled $\mu_n$;&lt;/li&gt;
+&lt;li&gt;$F$ is simply a sampled latent stochastic language model
+There is no essential difference between this two, because the second one is equivalent to setting certain preference to $G$ under certain context. Under the first understanding, we can simply fine-tune $G$ (which i assume to be smaller since it is only a planner with limited knowledge). Under the second, it is actually more interesting. Since tools or retrievers can be considered as functions, we can simply get a set of input output pairs, $(x,y)$ and see if any existing cluster in $\mu$ already models this behavior. If not, we can train to incorporate a new cluster (function). Furthermore, if we firmly believe that a tool is more accurate than trained models (e.g., calculator), we can always call the tool when $G$ produces the new cluster. In essence, we are able to map almost any functions into the parameter space of the $\mu$.
+PS: Look at this &lt;a href=&#34;https://arxiv.org/abs/2104.09841&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;paper&lt;/a&gt; for retrieval augmentation. I already remember a simiar tool learning paper like this but cannot retrieve the name from my memory lol.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;role-playing-and-other-smart-prompting-cot-in-context-learning&#34;&gt;Role Playing and Other Smart Prompting (CoT, In-context Learning)&lt;/h3&gt;
+&lt;p&gt;Simply put, $P(|z)$ is a sampled $\mu_n$ for the prompt $z$, no matter inserted at the beginning or in the middle. A little more notes for in-context learning: it can be considered as forming a new cluster with the knowledge of provided examples.&lt;/p&gt;
+&lt;h3 id=&#34;alignment-methods-sft--rlhf&#34;&gt;Alignment Methods (SFT &amp;amp; RLHF)&lt;/h3&gt;
+&lt;p&gt;Corresponds to fine-tuning $G$. However, in SPLM training $G$ will definitely not affect the knowledge structure (similar to the example explained in the debiasing), since knowledge is stored in $\mu$.&lt;/p&gt;
+&lt;h3 id=&#34;some-recent-work&#34;&gt;Some Recent Work&lt;/h3&gt;
+&lt;p&gt;This is definitely an incomplete list of work that is related to this framework. I just kind of randomly picked a few since this post is already too long. Also since I already relates this framework with many approaches, I am only showing those work that are not directly using this apporach.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/2310.02226&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Think before You Speak&lt;/a&gt;. Each inserted sequences of pause tokens rewires the on-going language model to a sampled $\mu_n$.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/2310.12143&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Simple Mechanisms for Representing, Indexing and Manipulating Concepts&lt;/a&gt; This work associates training samples with subspaces in a model. SPLM associates group of texts with latent clusters.&lt;/li&gt;
+&lt;li&gt;Another interesting work of Yuanzhi is described in his inspiring talk &lt;a href=&#34;https://www.youtube.com/watch?v=M25cbX5do8Y&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Physics of Language Models&lt;/a&gt;. He described an augmentation method of permuting sentences in a paragraph can improve the generalization of knowledge in the paragraph into other context. Actually this augmentation can be explained as approximating SPLM, which tries to associate a group text to a cluster of LMs that are aware of the knowledge in this group. So for each sentence $x$, we can expect the LM probability of the entire paragraph should be promoted in the associated cluster of LMs. By permutation, such promotion of probability is essentially applied to $P(|x,M)$ for a language model $M$. Simply put, it is trying to approximate SPLM with a single LM through prompting(or context overloading).&lt;/li&gt;
+&lt;li&gt;In fact, I studied an almost identical problem and used another method for context overloading in this &lt;a href=&#34;https://arxiv.org/pdf/2305.18582&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;work&lt;/a&gt;, which is also an approximation of SPLM.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;thoughts-on-implementation&#34;&gt;Thoughts on Implementation&lt;/h2&gt;
+&lt;p&gt;I have some initial thoughts on implementing through variation inference. The key challenge might lies within the potentially large number of latent variables to learn (corresponds to LM paramters), as well as the efficiency concerns since it will requires re-running the previous context when new latent cluster is sampled. I am thinking about implememnting variational inference only on the last few layers. And for efficiency, I am considering using different layers as different mixutres (somewhat inspired by speculative decoding and neural logical models that compose lower level logics in lower layers into higher-order logic in higher layers). I might add more details when I get time.&lt;/p&gt;
+&lt;p&gt;It might also be approximated through context overloading, as some of existing work is already going towards.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
