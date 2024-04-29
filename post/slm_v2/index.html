@@ -920,7 +920,7 @@
 <h2 id="the-shorter-version">The Shorter Version</h2>
 <p>A language model is optimized to produce a distribution that matches the data distribution. Suppose we have a prior distribution over language models, denoted by $\mu \in \Pi_\mathcal{S}$. We can interpret the learning process as:
 $$
-M = \argmax_M P(\mathcal{D}|M) P(M|\mu).
+M = \arg\max_M P(\mathcal{D}|M) P(M|\mu).
 $$
 I would like to make a strong argument: We should learn $\mu$ instead of any single constant language model $M$. I interpret $\mu$ as a &ldquo;filter&rdquo; that discards all models $H$ where $P(\mathcal{D}|H)=0$. For example, a model that believes both <em>&ldquo;Tom likes playing sports&rdquo;</em> and <em>&ldquo;Tom doesn&rsquo;t like playing sports&rdquo;</em> is not feasible. For any specific query $q$, we should sample from $\mu$ to generate responses:
 $$
@@ -953,7 +953,7 @@ To implement this modeling, I am thinking of two potential approaches.</p>
 </ul>
 <h2 id="the-longer-version-with-rationales">The Longer Version with Rationales</h2>
 <h3 id="constant-language-models">Constant Language Models</h3>
-<p>A language model $M\in\mathcal{P}<em>\mathcal{S}$ is a distribution over token sequences: It gives a probability $P(s|M)$ for any sequence $s\in\mathcal{S}$. Moreover, given any partial sequence $x</em>{1:n}\in \mathcal{V}^n$ from a longer sequence $x_{1:m}\in\mathcal{V}^m$, the language model naturally computes a conditional distribution $P(x_{n+1:m}|x_{1:n}, M)=\frac{P(x_{1:m}|M)}{P(x_{1:n}|M)}$. This is used by &ldquo;Chat&rdquo; models, which response to a user query $q$ by sampling a response $r\sim P(\cdot|q, M)$.</p>
+<p>A language model $M\in\mathcal{P}_\mathcal{S}$ is a distribution over token sequences: It gives a probability $P(s|M)$ for any sequence $s\in\mathcal{S}$. Moreover, given any partial sequence $x_{1:n}\in \mathcal{V}^n$ from a longer sequence $x_{1:m}\in\mathcal{V}^m$, the language model naturally computes a conditional distribution $P(x_{n+1:m}|x_{1:n}, M)=\frac{P(x_{1:m}|M)}{P(x_{1:n}|M)}$. This is used by &ldquo;Chat&rdquo; models, which response to a user query $q$ by sampling a response $r\sim P(\cdot|q, M)$.</p>
 <p>We usually train such a model over three stages:</p>
 <ul>
 <li>Pre-train on a text corpus</li>
@@ -962,13 +962,13 @@ To implement this modeling, I am thinking of two potential approaches.</p>
 </ul>
 <p>In all three stages, a language model is optimized to produce a distribution that matches the data distribution. Suppose we have a prior distribution over language models, denoted by $\mu \in \Pi_\mathcal{S}$. The prior comes from the architectural design and the modeling of the language (e.g., autoregressive transformers). We can interpret the learning process as the Bayesian inference:
 $$
-M = \argmax_M P(\mathcal{D}|M) P(M|\mu).
+M = \arg\max_M P(\mathcal{D}|M) P(M|\mu).
 $$</p>
 <p>It might seem tricky to interpret the preference alignment in a Bayesian fashion. However, since RLHF and its variants are essentially optimizing a text distribution where responses&rsquo; observed frequencies are rescaled according to the rewards assigned, the preference alignment also fits the framework.</p>
 <p>Despite the success of language modeling demonstrated by models like GPT-4, I think this paradigm is fundamentally undesirable because <strong><em>Language Modeling Only Explains Data In a Most Probable Way</em></strong>.</p>
 <p>First consider a uniform prior assignment $\mu$, where the optimization becomes
 $$
-M = \argmax_M P(\mathcal{D}|M).
+M = \arg\max_M P(\mathcal{D}|M).
 $$</p>
 <p>This means that the optimal language model under uniform prior gives zero probability to unseen or novel sentences, indicating zero generalization. No matter how much data we have, this is not desired since:</p>
 <ul>
