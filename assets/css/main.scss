@@ -1,0 +1,20 @@
+---
+---
+
+/* Put overrides BEFORE imports (Minimal Mistakes requirement). */
+$serif: "Literata", "Merriweather", Georgia, Times, serif;
+$global-font-family: $serif;   // main text uses this in many places :contentReference[oaicite:3]{index=3}
+
+/* Optional: keep headings sans-serif for contrast */
+// $header-font-family: $sans-serif;
+
+/* Or, if you want the whole site to feel “literary”: */
+$header-font-family: $serif;
+$caption-font-family: $serif;  // small UI text in some places (optional)
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+.masthead, .greedy-nav, .greedy-nav a,
+.sidebar, .sidebar p, .sidebar li, .author__name, .author__bio, .author__bio p, .author__urls {
+  font-family: $serif !important;
+}

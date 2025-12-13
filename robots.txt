@@ -1,3 +1,0 @@
-User-agent: *
-
-Sitemap: https://perfec-yu.github.io/sitemap.xml
