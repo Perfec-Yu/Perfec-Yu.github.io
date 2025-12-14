@@ -18,3 +18,10 @@ $caption-font-family: $serif;  // small UI text in some places (optional)
 .sidebar, .sidebar p, .sidebar li, .author__name, .author__bio, .author__bio p, .author__urls {
   font-family: $serif !important;
 }
+
+.author__bio img.inline-icon {
+  width: 0.95em;
+  height: 0.95em;
+  vertical-align: -0.12em; /* align with text */
+  margin-left: 0.25em;
+}

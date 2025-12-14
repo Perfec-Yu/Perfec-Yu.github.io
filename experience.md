@@ -49,13 +49,18 @@ Post-training and evaluations for LLM alignment and usefulness.
 {: #education}
 
 <div class="notice--primary" markdown="1">
-**University of Illinois Urbana–Champaign**  
+<img src="/assets/icons/uiuc.svg" alt="University of Illinois Urbana–Champaign" width="20" height="20"> **University of Illinois Urbana–Champaign** 
+
+
 PhD in Computer Science · *2019.08 – 2024.08*  
-Advisor: Prof. Heng Ji
+Advisor: [Prof. Heng Ji](https://blender.cs.illinois.edu/hengji.html)
+
+Committee (Alphabetical): [Prof. Jiawei Han](https://hanj.cs.illinois.edu/), [Prof. Derek Hoiem](https://dhoiem.cs.illinois.edu/), [Prof. Gramham Neubig](https://phontron.com/), [Dr. Scott Wen-tau Yih](https://scottyih.org/)
 </div>
 
 <div class="notice--primary" markdown="1">
-**Tsinghua University**  
+<img src="/assets/icons/thu.svg" alt="Tsinghua University" width="20" height="20"> **Tsinghua University** 
+ 
 BE in Electronic Engineering; secondary BS in Mathematics · *2015.09 – 2019.07*  
-NLP research advised by Prof. Zhiyuan Liu
+NLP research advised by [Prof. Zhiyuan Liu](https://nlp.csai.tsinghua.edu.cn/~lzy/).
 </div>

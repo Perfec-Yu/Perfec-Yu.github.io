@@ -15,6 +15,10 @@ defaults:
     values:
       show_date: true
       read_time: true
+  - scope:
+      path: ""
+    values:
+      classes: wide
 
 enable_copy_code_button: true
 atom_feed:
@@ -38,7 +42,14 @@ author:
   bio      : |
     Working on Agentic RL for LLMs.
 
-    PhD@CS, BE@EE, BS@MATH
+    PhD from University of Illinois Urbana–Champaign <img class="inline-icon" src="/assets/icons/uiuc_square.svg" alt="University of Illinois Urbana–Champaign">
+    -  Computer Science
+    
+    Bachelor's Degree from Tsinghua University <img class="inline-icon" src="/assets/icons/thu.svg" alt="Tsinghua University">
+    - Electronic Engineering
+    - Mathematics
+    
+    
   location : "CA, USA"
   links:
     - label: "GitHub"
