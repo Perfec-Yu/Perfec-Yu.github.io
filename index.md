@@ -28,6 +28,5 @@ For Featured Publications, please see my [Research](./research/) page. For a com
 I believe in using AI to **accelerate scientific discovery**. I think *scientist–AI collaboration* is one of the most meaningful near-term paths to impact, even as we move toward increasingly autonomous agents. In addition, I have broader interests in **Diffusion & Flow-Matching Models**, **Pretraining Data Selection**, **Model Architecture Design**, and **ML System**.
 
 <div class="notice notice--morandi-yellow" markdown="1">
-__*If you’re interested in anything related or not related to the content above, feel free to reach out.*__
-</div>
----
+If you have any request, feel free to reach out.
+</div> <br/>
