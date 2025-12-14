@@ -38,6 +38,7 @@ github:
 
 author:
   name     : "Pengfei Yu"
+  email    : "life4pf AT gmail DOT com"
   avatar   : "/assets/images/teaser_profile.png"
   bio      : |
     Working on Agentic RL for LLMs.

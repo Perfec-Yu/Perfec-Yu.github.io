@@ -4,7 +4,10 @@ title: About Me
 author_profile: true
 ---
 
-Hi — I'm **Pengfei Yu**, working on **agentic learning for large language models** at Amazon AGI Foundations. I am a major contributor to **Nova2 agentic capabilities**, achieving **state-of-the-art tool-integrated reasoning** performance on academic benchmarks and **advanced agentic capabilities** on agentic benchmarks. My current research focuses on **Agentic Post-Training (SFT & RL)** to boost LLM's general intelligence through more robust reinforcement learning framework, better context management and improved reward signals. Previously, I worked at **Boson AI**, where I focused on language model post-training and evaluations for role-playing games.
+Hi — I'm **Pengfei Yu**, working on **agentic learning for large language models** at Amazon AGI Foundations. 
+
+
+I am a major contributor to **Nova2 agentic capabilities**, achieving **state-of-the-art tool-integrated reasoning** performance on academic benchmarks and **advanced agentic capabilities** on agentic benchmarks. My current research focuses on **Agentic Post-Training (SFT & RL)** to boost LLM's general intelligence through more robust reinforcement learning framework, better context management and improved reward signals. Previously, I worked at **Boson AI**, where I focused on language model post-training and evaluations for role-playing games.
 
 I earned a **Ph.D. in Computer Science** from UIUC, advised by [Prof. Heng Ji](https://blender.cs.illinois.edu/hengji.html). I am honored to have My PhD thesis [Association knowledge in natural language learning](https://www.ideals.illinois.edu/items/134236) advised by [Prof. Jiawei Han](https://hanj.cs.illinois.edu/), [Prof. Derek Hoiem](https://dhoiem.cs.illinois.edu/), [Prof. Gramham Neubig](https://phontron.com/) and [Dr. Scott Wen-tau Yih](https://scottyih.org/) (alphabetically ordered).  Before that, I studied **Electronic Engineering** and **Mathematics** at Tsinghua University for Bachelor's, where I did NLP research under the guidance of [Prof. Zhiyuan Liu](https://nlp.csai.tsinghua.edu.cn/~lzy/).
 
@@ -13,7 +16,7 @@ I earned a **Ph.D. in Computer Science** from UIUC, advised by [Prof. Heng Ji](h
 - **Evaluation & safety for agents**: Benchmarks, failure analysis, and guardrails for risky agent behaviors.
 - **LLM Mechanisms**: Understanding hallucination, knowledge editing mechanisms, and decision-making patterns.
 
-### Recent projects
+### Recent publications
 For Featured Publications, please see my [Research](./research/) page. For a complete list, please visit my [Google Scholar Profile](https://scholar.google.com/citations?user=bFbykBYAAAAJ&hl=en).
 - [**SABER**](https://arxiv.org/abs/2512.07850): safeguarding mutating steps in LLM agents with reflection + context management.
   - [**TauBench-Verified**](https://github.com/amazon-agi/tau2-bench-verified): curating a high-quality agentic benchmark for fair evaluations for LLM agents.
@@ -22,7 +25,7 @@ For Featured Publications, please see my [Research](./research/) page. For a com
 - [**Hallucination analysis**](https://aclanthology.org/2025.findings-acl.1199/): connecting hallucination to generalization/data bias and proposing causal inference based detection and mitigation methods.
 
 
-### What's Else
+### What's else
 I believe in using AI to **accelerate scientific discovery**. I think *scientist–AI collaboration* is one of the most meaningful near-term paths to impact, even as we move toward increasingly autonomous agents. In addition, I have broader interests in **Diffusion & Flow-Matching Models**, **Pretraining Data Selection**, **Model Architecture Design**, and **ML System**.
 
 > If you’re building LLM training/evals, or interested in anything related or not related to the content above, feel free to reach out.
