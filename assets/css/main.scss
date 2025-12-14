@@ -26,6 +26,7 @@ $caption-font-family: $serif;  // small UI text in some places (optional)
   margin-left: 0.25em;
 }
 
+
 html {
   font-size: 15px;                /* default is commonly 16px */
   -webkit-text-size-adjust: 100%;
@@ -34,3 +35,33 @@ html {
 /* Optional: keep it responsive */
 @media (min-width: 768px) { html { font-size: 16px; } }
 @media (min-width: 1024px){ html { font-size: 17px; } }
+
+/* Morandi-ish light yellow notice */
+.notice--morandi-yellow {
+  background: #F3E8C6; /* tweak this hex to taste */
+  // border-left: 0.25rem solid #D6C27D;
+  color: #3B3528;
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  code {
+    background: rgba(255, 255, 255, 0.55);
+  }
+}
+
+.notice,
+.notice p,
+.notice li {
+  font-size: 15px;
+}
+
+.author__bio,
+.author__bio p,
+.author__bio li 
+.author__bio ul {
+  font-size: 15px;
+}

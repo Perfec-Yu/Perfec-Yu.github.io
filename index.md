@@ -6,7 +6,6 @@ author_profile: true
 
 Hi — I'm **Pengfei Yu**, working on **agentic learning for large language models** at Amazon AGI Foundations. 
 
-
 I am a major contributor to **Nova2 agentic capabilities**, achieving **state-of-the-art tool-integrated reasoning** performance on academic benchmarks and **advanced agentic capabilities** on agentic benchmarks. My current research focuses on **Agentic Post-Training (SFT & RL)** to boost LLM's general intelligence through more robust reinforcement learning framework, better context management and improved reward signals. Previously, I worked at **Boson AI**, where I focused on language model post-training and evaluations for role-playing games.
 
 I earned a **Ph.D. in Computer Science** from UIUC, advised by [Prof. Heng Ji](https://blender.cs.illinois.edu/hengji.html). I am honored to have My PhD thesis [Association knowledge in natural language learning](https://www.ideals.illinois.edu/items/134236) advised by [Prof. Jiawei Han](https://hanj.cs.illinois.edu/), [Prof. Derek Hoiem](https://dhoiem.cs.illinois.edu/), [Prof. Gramham Neubig](https://phontron.com/) and [Dr. Scott Wen-tau Yih](https://scottyih.org/) (alphabetically ordered).  Before that, I studied **Electronic Engineering** and **Mathematics** at Tsinghua University for Bachelor's, where I did NLP research under the guidance of [Prof. Zhiyuan Liu](https://nlp.csai.tsinghua.edu.cn/~lzy/).
@@ -28,6 +27,7 @@ For Featured Publications, please see my [Research](./research/) page. For a com
 ### What's else
 I believe in using AI to **accelerate scientific discovery**. I think *scientist–AI collaboration* is one of the most meaningful near-term paths to impact, even as we move toward increasingly autonomous agents. In addition, I have broader interests in **Diffusion & Flow-Matching Models**, **Pretraining Data Selection**, **Model Architecture Design**, and **ML System**.
 
-> If you’re building LLM training/evals, or interested in anything related or not related to the content above, feel free to reach out.
-
-
+<div class="notice notice--morandi-yellow" markdown="1">
+__*If you’re interested in anything related or not related to the content above, feel free to reach out.*__
+</div>
+---
